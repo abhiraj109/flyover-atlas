@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.egg-info/
+runs/
+data/benchmark/challenge.webm
+.ruff_cache/
+/Transcript.txt
+.env
+.env.*

@@ -1,0 +1,15 @@
+case,verdict,true_rank,error_m,cluster_rows,coverage,flight_margin_db,points,scored,seconds,peak_traced_mib
+known,candidate,1.0,0.0,1,1.0,,1,1,2.03,36.18
+timed,ambiguous,1.0,43.2,15,1.0,,160,127,2.29,34.68
+pair,candidate,1.0,8.2,4,1.0,16.923934236682324,172,196,4.81,66.7
+noise,insufficient evidence,2.0,566.6,0,1.0,0.12557480255301012,188,205,4.85,66.71
+excluded,insufficient evidence,,,0,,,30,0,0.05,5.1
+broken-gap,insufficient evidence,,,0,,,56,0,0.14,5.1
+no-delay,ambiguous,1.0,78.7,6,1.0,14.993070593930995,168,237,5.85,66.79
+sound-speed,candidate,1.0,133.3,5,1.0,11.812231380509512,156,173,5.34,66.63
+wind,ambiguous,1.0,8.2,3,1.0,14.727124840219723,173,186,4.87,66.66
+rpm,ambiguous,1.0,839.5,42,1.0,1.2722541695043414,169,224,4.94,66.77
+dropout,insufficient evidence,,,0,,,56,0,0.12,5.1
+wider,candidate,1.0,13.8,5,1.0,16.819576904844645,380,276,5.29,66.93
+reindexed,candidate,1.0,8.2,4,1.0,16.923934236682324,172,196,5.16,66.69
+cached,candidate,1.0,8.2,4,1.0,16.923934236682324,172,196,4.4,66.67

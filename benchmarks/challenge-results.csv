@@ -1,0 +1,4 @@
+case,verdict,flight_groups,evaluated_points,coarse_matches,coarse_cache_hit,scored_rows,clusters,elapsed_s,peak_traced_mib,true_rank,error_m,footprint_points,radius_m,margin_db,coverage
+known,candidate,589,1,3,False,3,1,7.512,212.01,1,0.0,1,0.0,10.8,1.0
+regional,ambiguous,589,287,336,False,596,1,23.747,166.83,1,23.6,40,255.0,10.09,1.0
+wider,ambiguous,589,822,1175,False,1452,1,45.931,190.33,1,40.0,40,255.0,8.38,1.0
