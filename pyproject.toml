@@ -1,10 +1,15 @@
 [project]
-name = "placefinder-sound"
+name = "flyover-atlas"
 version = "0.1.0"
+description = "Estimate recording locations by matching aircraft sounds with historical flight tracks."
 requires-python = ">=3.12"
 dependencies = ["dopplertrack==0.3.0"]
 
+[project.urls]
+Repository = "https://github.com/abhiraj109/flyover-atlas"
+
 [project.scripts]
+flyover-atlas = "placefinder.cli:main"
 placefinder = "placefinder.cli:main"
 
 [build-system]

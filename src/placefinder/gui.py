@@ -101,7 +101,7 @@ def main():
     from tkinter import filedialog, ttk
 
     root = tk.Tk()
-    root.title("Place Finder by Sound")
+    root.title("Flyover Atlas")
     panel = ttk.Frame(root, padding=24)
     panel.pack(fill="both", expand=True)
     panel.columnconfigure(0, weight=1)

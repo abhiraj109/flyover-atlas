@@ -178,7 +178,7 @@ class Handler(BaseHTTPRequestHandler):
 def main():
     with Workspace() as server:
         print(
-            f"Place Finder is running at {server.url}. Press Ctrl+C to close it.",
+            f"Flyover Atlas is running at {server.url}. Press Ctrl+C to close it.",
             flush=True,
         )
         webbrowser.open(server.url)

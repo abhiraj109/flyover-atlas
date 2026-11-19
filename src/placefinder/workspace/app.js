@@ -109,7 +109,7 @@ async function poll() {
     show(state);
     if (running) setTimeout(poll, 850);
   } catch {
-    show({phase:"error", message:"The app lost its connection. Reopen Place Finder if you closed the launcher."});
+    show({phase:"error", message:"The app lost its connection. Reopen Flyover Atlas if you closed the launcher."});
   }
 }
 

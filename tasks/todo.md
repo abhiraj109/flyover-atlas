@@ -1,4 +1,4 @@
-# Place Finder by Sound implementation checklist
+# Flyover Atlas implementation checklist
 
 The [project plan](plan.md) describes the model, data formats, benchmark, and planned build order. Paths below are proposed for a new local Python project.
 
