@@ -394,7 +394,7 @@ def search(
                     ylabel="Frequency (Hz)",
                     title=f"{row[f'flight{n}']} at {row.lat:.5f}, {row.lon:.5f}",
                 )
-                ax.legend()
+                ax.legend(loc="upper right")
             fig.savefig(out / f"{name}.png")
             plt.close(fig)
     summary = dict(

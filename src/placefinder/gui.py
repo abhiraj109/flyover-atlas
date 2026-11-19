@@ -1,12 +1,13 @@
 """Guided Windows interface for regional audio searches."""
 
 import os
+from math import isfinite
 from pathlib import Path
 from queue import Empty, Queue
 from threading import Thread
 from tempfile import mkdtemp
-import tkinter as tk
-from tkinter import filedialog, ttk
+
+from dopplertrack.audio import Spectrogram
 
 from .inputs import index_tracks, mark, prepare, write_json
 from .search import search
@@ -34,7 +35,7 @@ def run_job(settings, notify):
         def numbers(value, count, label):
             try:
                 values = [float(x) for x in value.replace(",", " ").split()]
-                if len(values) == count:
+                if len(values) == count and all(map(isfinite, values)):
                     return values
             except ValueError:
                 pass
@@ -47,19 +48,35 @@ def run_job(settings, notify):
         else:
             utc = numbers(settings[5], 1, "the recording start time")[0]
         box = numbers(settings[4], 4, "the search area")
+        south, north, west, east = box
+        if not (-89 < south < north < 89 and -180 <= west < east <= 180):
+            raise ValueError("Enter the search area in south, north, west, east order.")
+        for start, end, low, high in windows:
+            if not (0 <= start < end and 40 <= low < high <= 450):
+                raise ValueError(
+                    "Each flyover needs increasing times and a pitch range between 40 and 450 Hz."
+                )
+        if len(windows) == 2 and windows[0][1] >= windows[1][0]:
+            raise ValueError("The second flyover must start after the first one ends.")
+    if not media.is_file():
+        raise ValueError(
+            "The example recording is missing. Download challenge.webm using the benchmark instructions in the README."
+        )
     notify("Reading the recording and drawing its sound chart…")
     manifest = out / "recording.json"
     write_json(manifest, {"source": str(media.resolve())})
     spec = out / "spec.npz"
     prepare(manifest, spec)
+    sound = Spectrogram.load(spec)
     events = []
     for i, (a, b, lo, hi) in enumerate(windows, 1):
         notify(f"Following the changing pitch of flyover {i}…")
         event = out / f"event{i}.json"
         mark(
-            spec, [a, b], [lo, hi], event, DATA / f"ridge{i}.json" if example else None
+            sound, [a, b], [lo, hi], event, DATA / f"ridge{i}.json" if example else None
         )
         events.append(event)
+    del sound
     notify("Reading the aircraft positions…")
     day = out / "day.npz"
     index_tracks(tracks, day)
@@ -80,6 +97,9 @@ def run_job(settings, notify):
 
 
 def main():
+    import tkinter as tk
+    from tkinter import filedialog, ttk
+
     root = tk.Tk()
     root.title("Place Finder by Sound")
     panel = ttk.Frame(root, padding=24)

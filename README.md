@@ -4,9 +4,9 @@ Match a marked aircraft tone to a historical flight track, or match two flyovers
 
 ## Open the Windows app
 
-Install Python 3.12 or newer with Tkinter, uv, and FFmpeg. Make sure uv, ffmpeg, and ffprobe are on PATH. For the example, download the recording using the [benchmark instructions](data/benchmark/README.md) and save it as data/benchmark/challenge.webm.
+Install Python 3.12 or newer, uv, and FFmpeg. Make sure uv, ffmpeg, and ffprobe are on PATH. For the example, download the recording using the [benchmark instructions](data/benchmark/README.md) and save it as data/benchmark/challenge.webm.
 
-Double-click **Open Place Finder.cmd** in the project folder. Leave **Example recording** selected and click **Find location**. When it finishes, click **See the sound match** to view the two plane sounds. For your own recording, choose **My recording** and supply its matching track CSV and flyover windows. Terrain lookup needs internet the first time. Each run saves its results in a new folder under runs/interface.
+Double-click **Open Place Finder.cmd** in the project folder. The launcher opens a local workspace in your browser. Leave **Example** selected and click **Find location**. The results show the best match, the sound charts, and downloads for QGIS and spreadsheets. For your own recording, choose **My recording** and supply its matching track CSV and flyover windows. Terrain lookup needs internet the first time. Each run saves its results in a new folder under runs/interface. The server listens on this computer only. To open the original desktop window with Tkinter, run `uv run python -m placefinder.gui`.
 
 ## Run locally
 

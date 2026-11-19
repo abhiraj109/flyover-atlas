@@ -124,6 +124,13 @@ def prepare(manifest, out):
 def index_tracks(csv, out):
     df = pd.read_csv(csv, dtype={"flight": str, "segment": str}, keep_default_na=False)
     cols = ["utc_s", "lat", "lon", "alt_m"]
+    required = {"flight", "segment", "alt_reference", "alt_source", *cols}
+    missing = required.difference(df.columns)
+    if missing:
+        raise ValueError(
+            "Flight tracks CSV is missing columns: " + ", ".join(sorted(missing))
+        )
+    df[cols] = df[cols].apply(pd.to_numeric)
     if (
         not np.isfinite(df[cols].to_numpy(dtype=float)).all()
         or not (df.lat.between(-90, 90) & df.lon.between(-180, 180)).all()
@@ -159,7 +166,8 @@ def index_tracks(csv, out):
 
 
 def mark(spec, window, band, out, points=None):
-    sp = Spectrogram.load(spec).crop(*window, *band)
+    sp = spec if isinstance(spec, Spectrogram) else Spectrogram.load(spec)
+    sp = sp.crop(*window, *band)
     if min(sp.S.shape) < 5:
         raise ValueError(
             "event window must contain at least five frames and frequency bins"

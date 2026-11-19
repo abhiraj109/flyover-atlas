@@ -66,7 +66,9 @@ def extract(parts, out):
             raw = tar.extractfile(entry).read()
             if raw.startswith(b"\x1f\x8b"):
                 raw = gzip.decompress(raw)
-            if b"-73." not in raw or not re.search(rb",\s*40\.[789]\d*\s*,\s*-73\.", raw):
+            if b"-73." not in raw or not re.search(
+                rb",\s*40\.[789]\d*\s*,\s*-73\.", raw
+            ):
                 continue
             track = json.loads(raw)
             if not isinstance(track, dict):
